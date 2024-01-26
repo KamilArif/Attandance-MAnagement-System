@@ -227,7 +227,7 @@ if(isset($_POST['save'])){
                         <div class="col-xl-6">
                         <label class="form-control-label">Select Class<span class="text-danger ml-2">*</span></label>
                          <?php
-                        $qry= "SELECT * FROM tblclass ORDER BY className ASC";
+                        $qry= "SELECT * FROM tblclass ORDER BY className";
                         $result = $conn->query($qry);
                         $num = $result->num_rows;		
                         if ($num > 0){

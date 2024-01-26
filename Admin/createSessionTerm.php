@@ -184,7 +184,7 @@ if(isset($_POST['save'])){
                         <div class="col-xl-6">
                             <label class="form-control-label">Term<span class="text-danger ml-2">*</span></label>
                               <?php
-                        $qry= "SELECT * FROM tblterm ORDER BY termName ASC";
+                        $qry= "SELECT * FROM tblterm ORDER BY termName";
                         $result = $conn->query($qry);
                         $num = $result->num_rows;		
                         if ($num > 0){

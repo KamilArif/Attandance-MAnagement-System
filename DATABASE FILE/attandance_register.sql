@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 06, 2022 at 09:57 PM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 8.0.1
+-- Generation Time: Jan 26, 2024 at 12:37 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `attendancemsystem`
+-- Database: `attandance_register`
 --
 
 -- --------------------------------------------------------
@@ -99,7 +99,10 @@ INSERT INTO `tblattendance` (`Id`, `admissionNo`, `classId`, `classArmId`, `sess
 (200, 'AMS148', '4', '6', '1', '0', '2022-06-06'),
 (201, 'AMS151', '4', '6', '1', '1', '2022-06-06'),
 (202, 'AMS159', '4', '6', '1', '1', '2022-06-06'),
-(203, 'AMS161', '4', '6', '1', '1', '2022-06-06');
+(203, 'AMS161', '4', '6', '1', '1', '2022-06-06'),
+(204, 'AMS012', '1', '4', '1', '1', '2024-01-25'),
+(205, 'AMS015', '1', '4', '1', '1', '2024-01-25'),
+(206, 'AMS017', '1', '4', '1', '0', '2024-01-25');
 
 -- --------------------------------------------------------
 
@@ -117,9 +120,10 @@ CREATE TABLE `tblclass` (
 --
 
 INSERT INTO `tblclass` (`Id`, `className`) VALUES
-(1, 'Seven'),
-(3, 'Eight'),
-(4, 'Nine');
+(1, 'BS 1st Year'),
+(13, 'BS 2nd Year'),
+(15, 'BS 4th Year'),
+(14, 'BS 3rd Year');
 
 -- --------------------------------------------------------
 
@@ -139,10 +143,16 @@ CREATE TABLE `tblclassarms` (
 --
 
 INSERT INTO `tblclassarms` (`Id`, `classId`, `classArmName`, `isAssigned`) VALUES
-(2, '1', 'S1', '1'),
-(4, '1', 'S2', '1'),
+(8, '13', 'Section  A', '0'),
+(4, '1', 'Section  A', '0'),
 (5, '3', 'E1', '1'),
-(6, '4', 'N1', '1');
+(6, '4', 'N1', '1'),
+(7, '1', 'Section  B', '0'),
+(9, '13', 'Section  B', '0'),
+(10, '14', 'Section  A', '0'),
+(11, '14', 'Section  B', '0'),
+(12, '15', 'Section  A', '0'),
+(13, '15', 'Section  B', '0');
 
 -- --------------------------------------------------------
 
@@ -168,9 +178,9 @@ CREATE TABLE `tblclassteacher` (
 
 INSERT INTO `tblclassteacher` (`Id`, `firstName`, `lastName`, `emailAddress`, `password`, `phoneNo`, `classId`, `classArmId`, `dateCreated`) VALUES
 (1, 'Will', 'Kibagendi', 'teacher2@mail.com', '32250170a0dca92d53ec9624f336ca24', '09089898999', '1', '2', '2022-10-31'),
-(4, 'Demola', 'Ade', 'teacher3@gmail.com', '32250170a0dca92d53ec9624f336ca24', '09672002882', '1', '4', '2022-11-01'),
 (5, 'Ryan', 'Mbeche', 'teacher4@mail.com', '32250170a0dca92d53ec9624f336ca24', '7014560000', '3', '5', '2022-10-07'),
-(6, 'John', 'Keroche', 'teacher@mail.com', '32250170a0dca92d53ec9624f336ca24', '0100000030', '4', '6', '2022-10-07');
+(6, 'John', 'Keroche', 'teacher@mail.com', '32250170a0dca92d53ec9624f336ca24', '0100000030', '4', '6', '2022-10-07'),
+(7, 'Khalid', 'Ur Rasheed', 'Khalid@gmail.com', 'Teacher@123', '03122863445', '1', '1', '');
 
 -- --------------------------------------------------------
 
@@ -191,8 +201,8 @@ CREATE TABLE `tblsessionterm` (
 --
 
 INSERT INTO `tblsessionterm` (`Id`, `sessionName`, `termId`, `isActive`, `dateCreated`) VALUES
-(1, '2021/2022', '1', '1', '2022-10-31'),
-(3, '2021/2022', '2', '0', '2022-10-31');
+(9, '2024/2025', '1', '1', '2024-01-26'),
+(8, '2024/2025', '2', '0', '2024-01-26');
 
 -- --------------------------------------------------------
 
@@ -232,7 +242,8 @@ INSERT INTO `tblstudents` (`Id`, `firstName`, `lastName`, `otherName`, `admissio
 (14, 'Lyn', 'Rogers', 'none', 'AMS148', '12345', '4', '6', '2022-10-07'),
 (15, 'James', 'Dominick', 'none', 'AMS151', '12345', '4', '6', '2022-10-07'),
 (16, 'Ethel', 'Quin', 'none', 'AMS159', '12345', '4', '6', '2022-10-07'),
-(17, 'Roland', 'Estrada', 'none', 'AMS161', '12345', '4', '6', '2022-10-07');
+(17, 'Roland', 'Estrada', 'none', 'AMS161', '12345', '4', '6', '2022-10-07'),
+(18, 'Kamal', 'Arif', 'KAnmil', 'adsfllkdfl', '12345', '1', '4', '2024-01-26');
 
 -- --------------------------------------------------------
 
@@ -250,9 +261,8 @@ CREATE TABLE `tblterm` (
 --
 
 INSERT INTO `tblterm` (`Id`, `termName`) VALUES
-(1, 'First'),
-(2, 'Second'),
-(3, 'Third');
+(1, 'Mid'),
+(2, 'Final');
 
 --
 -- Indexes for dumped tables
@@ -320,37 +330,37 @@ ALTER TABLE `tbladmin`
 -- AUTO_INCREMENT for table `tblattendance`
 --
 ALTER TABLE `tblattendance`
-  MODIFY `Id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=204;
+  MODIFY `Id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=207;
 
 --
 -- AUTO_INCREMENT for table `tblclass`
 --
 ALTER TABLE `tblclass`
-  MODIFY `Id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `Id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `tblclassarms`
 --
 ALTER TABLE `tblclassarms`
-  MODIFY `Id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `Id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `tblclassteacher`
 --
 ALTER TABLE `tblclassteacher`
-  MODIFY `Id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `Id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tblsessionterm`
 --
 ALTER TABLE `tblsessionterm`
-  MODIFY `Id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `Id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `tblstudents`
 --
 ALTER TABLE `tblstudents`
-  MODIFY `Id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `Id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `tblterm`
