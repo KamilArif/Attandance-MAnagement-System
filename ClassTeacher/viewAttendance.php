@@ -78,7 +78,8 @@ include '../Includes/session.php';
                   <h6 class="m-0 font-weight-bold text-primary">Class Attendance</h6>
                 </div>
                 <div class="table-responsive p-3">
-                  <table class="table align-items-center table-flush table-hover" id="dataTableHover">
+                  <!-- <table class="table align-items-center table-flush table-hover" id="dataTableHover"> -->
+                  <table id="example" class="table align-items-center table-flush table-hover">
                     <thead class="thead-light">
                       <tr>
                         <th>#</th>
@@ -191,12 +192,39 @@ include '../Includes/session.php';
   <script src="../vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
   <!-- Page level custom scripts -->
-  <script>
+  <!-- <script>
     $(document).ready(function () {
       $('#dataTable').DataTable(); // ID From dataTable 
       $('#dataTableHover').DataTable(); // ID From dataTable with Hover
     });
-  </script>
+  </script> -->
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.2.slim.min.js" integrity="sha256-E3P3OaTZH+HlEM7f1gdAT3lHAn4nWBZXuYe89DFg2d0=" crossorigin="anonymous"></script>
+ <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script> 
+ <link href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" rel="stylesheet">
+
+<script src="https://code.jquery.com/jquery-3.5.1.js "></script>
+<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.2/js/dataTables.buttons.min.js "></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js "></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js "></script>
+<script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.html5.min.js
+"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.print.min.js
+"></script>
+ <script>
+ $(document).ready(function() {
+    $('#example').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+    } );
+} );
+</script>
 </body>
 
 </html>

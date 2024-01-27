@@ -104,8 +104,9 @@ $class = mysqli_num_rows($query1);
             </div>
             <!-- Earnings (Annual) Card Example -->
              <?php 
-$query1=mysqli_query($conn,"SELECT * from tblclassarms");                       
+$query1=mysqli_query($conn,"SELECT * from tblclassarms,tblclassteacher WHERE tblclassarms.classId = tblclassteacher.classArmId");                       
 $classArms = mysqli_num_rows($query1);
+
 ?>
             <div class="col-xl-3 col-md-6 mb-4">
               <div class="card h-100">
