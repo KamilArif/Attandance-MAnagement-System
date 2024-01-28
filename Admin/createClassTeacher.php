@@ -15,6 +15,7 @@ if(isset($_POST['save'])){
   $phoneNo=$_POST['phoneNo'];
   $classId=$_POST['classId'];
   $classArmId=$_POST['classArmId'];
+  $subjectId=$_POST['subjectId'];
   $dateCreated = date("Y-m-d");
    
     $query=mysqli_query($conn,"select * from tblclassteacher where emailAddress ='$emailAddress'");
@@ -29,8 +30,8 @@ if(isset($_POST['save'])){
     }
     else{
 
-    $query=mysqli_query($conn,"INSERT into tblclassteacher(firstName,lastName,emailAddress,password,phoneNo,classId,classArmId,dateCreated) 
-    value('$firstName','$lastName','$emailAddress','$sampPass_2','$phoneNo','$classId','$classArmId','$dateCreated')");
+    $query=mysqli_query($conn,"INSERT into tblclassteacher(firstName,lastName,emailAddress,password,phoneNo,classId,classArmId,subjectId, dateCreated) 
+    value('$firstName','$lastName','$emailAddress','$sampPass_2','$phoneNo','$classId','$classArmId','$subjectId',$dateCreated')");
 
     if ($query) {
         
@@ -78,10 +79,11 @@ if(isset($_POST['save'])){
               $phoneNo=$_POST['phoneNo'];
               $classId=$_POST['classId'];
               $classArmId=$_POST['classArmId'];
+              $subjectId=$_POST['subjectId'];
               $dateCreated = date("Y-m-d");
 
     $query=mysqli_query($conn,"update tblclassteacher set firstName='$firstName', lastName='$lastName',
-    emailAddress='$emailAddress', password='$password',phoneNo='$phoneNo', classId='$classId',classArmId='$classArmId'
+    emailAddress='$emailAddress', password='$password',phoneNo='$phoneNo', classId='$classId',classArmId='$classArmId', subjectId='$subjectId'
     where Id='$Id'");
             if ($query) {
                 
@@ -150,7 +152,7 @@ if(isset($_POST['save'])){
    <script>
     function classArmDropdown(str) {
     if (str == "") {
-        document.getElementById("txtHint").innerHTML = "";
+        document.getElementById("getClassArm").innerHTML = "";
         return;
     } else { 
         if (window.XMLHttpRequest) {
@@ -162,10 +164,32 @@ if(isset($_POST['save'])){
         }
         xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("txtHint").innerHTML = this.responseText;
+                document.getElementById("getClassArm").innerHTML = this.responseText;
             }
         };
         xmlhttp.open("GET","ajaxClassArms.php?cid="+str,true);
+        xmlhttp.send();
+    }
+}
+
+function SubjectDropdown(str) {
+    if (str == "") {
+        document.getElementById("getSubject").innerHTML = "";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("getSubject").innerHTML = this.responseText;
+            }
+        };
+        xmlhttp.open("GET","ajaxClassArms3.php?sid="+str,true);
         xmlhttp.send();
     }
 }
@@ -231,7 +255,7 @@ if(isset($_POST['save'])){
                         $result = $conn->query($qry);
                         $num = $result->num_rows;		
                         if ($num > 0){
-                          echo ' <select required name="classId" onchange="classArmDropdown(this.value)" class="form-control mb-3">';
+                          echo ' <select required name="classId" onchange="classArmDropdown(this.value) , SubjectDropdown(this.value)" class="form-control mb-3">';
                           echo'<option value="">--Select Class--</option>';
                           while ($rows = $result->fetch_assoc()){
                           echo'<option value="'.$rows['Id'].'" >'.$rows['className'].'</option>';
@@ -243,7 +267,13 @@ if(isset($_POST['save'])){
                         <div class="col-xl-6">
                         <label class="form-control-label">Class Arm<span class="text-danger ml-2">*</span></label>
                             <?php
-                                echo"<div id='txtHint'></div>";
+                                echo"<div id='getClassArm'></div>";
+                            ?>
+                        </div>
+                        <div class="col-xl-6">
+                        <label class="form-control-label">Subject<span class="text-danger ml-2">*</span></label>
+                            <?php
+                                echo"<div id='getSubject'></div>";
                             ?>
                         </div>
                     </div>
@@ -282,6 +312,7 @@ if(isset($_POST['save'])){
                         <th>Phone No</th>
                         <th>Class</th>
                         <th>Class Arm</th>
+                        <th>Subject</th>
                         <th>Date Created</th>
                         <th>Delete</th>
                       </tr>

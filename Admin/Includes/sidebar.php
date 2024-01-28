@@ -48,14 +48,14 @@
      <li class="nav-item">
          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrapassests" aria-expanded="true" aria-controls="collapseBootstrapassests">
              <i class="fas fa-chalkboard-teacher"></i>
-             <span>Manage Teachers</span>
+             <span>Manage Subjects & Teachers</span>
          </a>
          <div id="collapseBootstrapassests" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
              <div class="bg-white py-2 collapse-inner rounded">
                  <h6 class="collapse-header">Manage Class Teachers</h6>
+                 <a class="collapse-item" href="createsubject.php">Create Subjects </a>
                  <a class="collapse-item" href="createClassTeacher.php">Create Class Teachers</a>
-                 <!-- <a class="collapse-item" href="assetsCategoryList.php">Assets Category List</a>
-             <a class="collapse-item" href="createAssets.php">Create Assets</a> -->
+             <!--<a class="collapse-item" href="createAssets.php">Create Assets</a> -->
              </div>
          </div>
      </li>
